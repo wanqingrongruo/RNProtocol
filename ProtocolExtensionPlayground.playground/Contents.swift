@@ -101,10 +101,25 @@ protocol ShowInfo {
     var desc: String { get }
 }
 
-extension Flight where Self: OperationalLife {
+extension Flight where Self: OperationalLife & ShowInfo {
     
     func shwoDesc() {
         
+        if isInService() {
+            print("给个好评啊\(desc)")
+        }
     }
     
 }
+
+extension A380: ShowInfo {
+    
+    var desc: String {
+        
+        return "我是马云爸爸"
+    }
+}
+
+let a382 = A380(delay: 400, normal: 1000, flyHour:  5 * 365 * 34)
+a382.shwoDesc()
+
