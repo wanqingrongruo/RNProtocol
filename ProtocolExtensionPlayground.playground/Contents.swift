@@ -120,6 +120,15 @@ extension A380: ShowInfo {
     }
 }
 
-let a382 = A380(delay: 400, normal: 1000, flyHour:  5 * 365 * 34)
-a382.shwoDesc()
+//let a382 = A380(delay: 400, normal: 1000, flyHour:  5 * 365 * 34)
+//a382.shwoDesc()
+
+
+let setBool: (Bool, String) -> Void = UserDefaults.standard.set
+let getBool: (String) -> Bool = UserDefaults.standard.bool
+
+
+
+
+
 
