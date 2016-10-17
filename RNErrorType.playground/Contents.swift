@@ -90,3 +90,31 @@ print("value: \(a)\n type: \(type(of: a))")
 //            print("OverLifting...\(weight) KG is allowed")
 //        }
 
+// the way which deals with error in swift
+
+enum Result<T>{
+    
+    case Success(T)
+    case Failure(String)
+}
+
+func newDivide(dividend: Double, by: Double) -> Result<Double>{
+    
+    if by == 0 {
+        return Result.Failure("cannot divided by zero")
+    }
+    else{
+        return Result.Success(dividend / by)
+    }
+}
+
+
+let user = newDivide(dividend: 8, by: 0)
+switch user {
+case let .Success(value):
+    print(value)
+case let .Failure(error):
+    print(error)
+}
+
+
