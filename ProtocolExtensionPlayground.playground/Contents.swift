@@ -89,6 +89,7 @@ extension A380: OperationalLife {
     var maxFlyHours: Int {
         
         return 18 * 365 * 24
+        
     }
 }
 
@@ -117,6 +118,7 @@ extension A380: ShowInfo {
     var desc: String {
         
         return "我是马云爸爸"
+        
     }
 }
 
