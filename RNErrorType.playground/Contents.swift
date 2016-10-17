@@ -96,8 +96,30 @@ enum Result<T>{
     
     case Success(T)
     case Failure(String)
+    
+    func map<P>(f: (T) -> P) -> Result<P>{
+        
+        switch self {
+        case .Success(let value):
+            return .Success(f(value))
+        case .Failure(let error):
+            return .Failure(error)
+        }
+    }
+    
+    func flatMap<P>(f: (T) -> Result<P>) -> Result<P>{
+        
+        switch self {
+        case .Success(let value):
+            return f(value)
+        case .Failure(let error):
+            return .Failure(error)
+            
+        }
+    }
 }
 
+// 除法
 func newDivide(dividend: Double, by: Double) -> Result<Double>{
     
     if by == 0 {
@@ -109,7 +131,7 @@ func newDivide(dividend: Double, by: Double) -> Result<Double>{
 }
 
 
-let user = newDivide(dividend: 8, by: 0)
+let user = newDivide(dividend: 8, by: 2)
 switch user {
 case let .Success(value):
     print(value)
@@ -117,4 +139,63 @@ case let .Failure(error):
     print(error)
 }
 
+// 平方根
+
+func numberSqrt(num: Result<Double>) -> Result<Double>{
+    
+    switch num {
+    case .Success(let num):
+        let res = sqrt(num)
+        return Result.Success(res)
+    case .Failure(let error):
+        return Result.Failure(error)
+    }
+}
+
+let res02 = numberSqrt(num: user)
+
+// 转字符串
+
+func numberToString(num: Result<Double>) -> Result<String>{
+    switch num {
+    case .Success(let num):
+        let s = String(format: "%.2lf", num)
+        return Result.Success(s)
+    case .Failure(let error):
+        return Result.Failure(error)
+        
+    }
+}
+
+
+let res03 = numberToString(num: res02)
+
+
+func numSqrt(num: Double) -> Double {
+    let s = sqrt(num)
+    return s
+}
+
+func num2String(num: Double) -> String {
+    let s = String(format: "%.10f", num)
+    return s
+}
+
+let res04 = user.map(f: numSqrt).map(f: num2String)
+
+
+
+// 平方根
+
+func numberSqrt02(num: Double) -> Result<Double>{
+    
+    if num < 0 {
+        return Result.Failure("Number can not be nagative")
+    }
+    else{
+        return Result.Success(sqrt(num))
+    }
+}
+
+let res05 = user.flatMap(f:numberSqrt02).map(f: num2String)
 
