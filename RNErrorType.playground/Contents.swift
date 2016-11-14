@@ -80,7 +80,7 @@ func working(robot: Robot) throws -> Int{
 }
 
 let iRobot = Robot()
-//我们使用了"try?"的形式调用了一个会抛出异常的方法，它把表达式的评估结果转换为一个Optional。例如，我们让working返回一个Int：
+//我们使用了"try?"的形式调用了一个会抛出异常的方法，它把表达式的评估结果转换为一个Optional。例如，我们让working返回一个Int?
 let a = try? working(robot: iRobot)
 print("value: \(a)\n type: \(type(of: a))")
 
